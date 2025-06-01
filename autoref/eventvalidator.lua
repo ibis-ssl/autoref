@@ -19,6 +19,7 @@
 *************************************************************************]]
 
 local TrackedWorld = require "base/world"
+local Metric = require "base/metric"
 local TrueWorld = require "validation-rules/trueworld"
 local LastTouch = require "validation-rules/lasttouch"
 
@@ -102,10 +103,13 @@ local waitingEvents = {
 	validation = {}
 }
 
+local eventsThisFrame = {}
+
 function EventValidator.sendEvent(event, fromTracked, fromValidation)
 	log(GameEvents.eventMessage(event) .. " [" .. (fromTracked and "R" or "") .. ((fromTracked and fromValidation) and ", " or "") ..
 		(fromValidation and "VR" or "") .. "]")
 	GameController.sendEvent(event)
+	eventsThisFrame[event.type] = true
 end
 
 function EventValidator.checkEvent(event, source)
@@ -171,6 +175,36 @@ function EventValidator.update()
 	end
 
 	EventValidator.checkEventTimeout()
+end
+
+local eventToFile = {
+	["BOT_CRASH_DRAWN"] = "collision",
+	["BOT_CRASH_UNIQUE"] = "collision",
+	["BOT_KICKED_BALL_TOO_FAST"] = "fastshot",
+	["BALL_LEFT_FIELD_GOAL_LINE"] = "outoffield",
+	["BALL_LEFT_FIELD_TOUCH_LINE"] = "outoffield",
+	["AIMLESS_KICK"] = "outoffield",
+	["POSSIBLE_GOAL"] = "outoffield",
+	["DEFENDER_IN_DEFENSE_AREA"] = "multipledefender",
+	["BOT_DRIBBLED_BALL_TOO_FAR"] = "dribbling",
+	["ATTACKER_TOUCHED_BALL_IN_DEFENSE_AREA"] = "attackerindefensearea",
+	["BOT_TOO_FAST_IN_STOP"] = "stopspeed",
+	["ATTACKER_TOO_CLOSE_TO_DEFENSE_AREA"] = "attackerdefareadist",
+	["DEFENDER_TOO_CLOSE_TO_KICK_POINT"] = "freekickdistance",
+	["ATTACKER_DOUBLE_TOUCHED_BALL"] = "doubletouch",
+	["PLACEMENT_SUCCEEDED"] = "ballplacement",
+	["BOT_INTERFERED_PLACEMENT"] = "placementinterference",
+}
+
+function EventValidator.createMetrics()
+	for event, filename in pairs(eventToFile) do
+		local foul = require("rules/" .. filename)()
+		local simpleRefState = TrackedWorld.RefereeState:match("%u%l+")
+		if (foul.runOnInvisibleBall or TrackedWorld.Ball:isPositionValid()) and foul.possibleRefStates[simpleRefState] then
+			Metric.addMetric("autoref/" .. event, eventsThisFrame[event] and 1 or 0, TrackedWorld.TimeDiff)
+		end
+	end
+	eventsThisFrame = {}
 end
 
 return EventValidator

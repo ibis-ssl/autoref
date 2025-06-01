@@ -48,6 +48,7 @@ Vector._loadGeom()
 require("base/coordinates")._setIsBlue(amun.isBlue())
 require "base/debug"
 require "base/plot"
+require "base/metric"
 require "base/robot"
 require "base/vis"
 require "base/world"

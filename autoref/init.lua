@@ -142,6 +142,8 @@ local function main()
 
 	debugEvents(eventsToSend)
 
+	EventValidator.createMetrics()
+
 	Referee.illustrateRefereeStates()
 end
 
