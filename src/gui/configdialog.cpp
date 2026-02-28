@@ -49,7 +49,7 @@ void ConfigDialog::sendConfiguration()
 {
     Command command(new amun::Command);
     // from ms to ns
-    command->mutable_tracking()->set_vision_transmission_delay(ui->visionTransmissionDelayBox->value() * 1000 * 1000);
+    command->mutable_tracking()->set_radio_command_delay(ui->visionTransmissionDelayBox->value() * 1000 * 1000);
 
     command->mutable_amun()->set_vision_port(ui->visionPort->value());
     command->mutable_amun()->set_referee_port(ui->refPort->value());

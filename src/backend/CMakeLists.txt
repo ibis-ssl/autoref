@@ -42,8 +42,8 @@ target_link_libraries(backend
     PRIVATE amun::processor
     PRIVATE amun::strategy
     PUBLIC shared::protobuf
-    PUBLIC Qt5::Core
-    PRIVATE Qt5::Network
+    PUBLIC Qt6::Core
+    PRIVATE Qt6::Network
 )
 target_include_directories(backend
     INTERFACE include

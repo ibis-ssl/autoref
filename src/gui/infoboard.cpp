@@ -22,6 +22,7 @@
 #include "ui_infoboard.h"
 #include "widgets/fieldwidget.h"
 #include "protobuf/debug.pb.h"
+#include <QRegularExpression>
 
 InfoBoard::InfoBoard(QWidget *parent) :
     QWidget(parent),
@@ -185,8 +186,8 @@ void InfoBoard::updateRefstate(const Status &status)
         }
 
         // put space between first two words, newline before third word if any
-        QString refStateNice = m_refState.replace(QRegExp("(.+)([A-Z])(.+)([A-Z])(.+)"), "\\1 \\2\\3<br>\\4\\5");
-        refStateNice = refStateNice.replace(QRegExp("^(.+)([A-Z])(.+)"), "\\1 \\2\\3");
+        QString refStateNice = m_refState.replace(QRegularExpression("(.+)([A-Z])(.+)([A-Z])(.+)"), "\\1 \\2\\3<br>\\4\\5");
+        refStateNice = refStateNice.replace(QRegularExpression("^(.+)([A-Z])(.+)"), "\\1 \\2\\3");
 
         QString displayText;
         if (m_autorefMsgInvalidated || m_foulEvent == "") {

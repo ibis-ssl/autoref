@@ -18,7 +18,7 @@
 # *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
 # ***************************************************************************
 
-cmake_minimum_required(VERSION 3.11.0)
+cmake_minimum_required(VERSION 3.13.0)
 project(erforce)
 enable_testing()
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" "${CMAKE_SOURCE_DIR}/src/framework/cmake")
@@ -84,10 +84,7 @@ if(NOT ${PROTOBUF_FOUND}
 endif()
 
 set(CMAKE_AUTOMOC ON)
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5Network REQUIRED)
-find_package(Qt5OpenGL REQUIRED)
+find_package(Qt6 COMPONENTS Core Widgets OpenGLWidgets Network OpenGL REQUIRED)
 
 if(NOT APPLE)
     # file open dialogs crash on mac

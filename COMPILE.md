@@ -1,6 +1,7 @@
 # Compiling Autoref
 
-All programs should work on GNU/Linux (tested on Ubuntu 16.04 and Arch Linux), Mac OS X 10.12 and Windows >= 7.
+All programs should work on GNU/Linux (tested on Ubuntu 22.04 and Arch Linux).
+They should also work on Mac OS and Windows, but no promises.
 
 ## Obtain the framework
 ```
@@ -8,12 +9,16 @@ git submodule update --init
 ```
 
 In order to build Autoref you will need:
- * cmake >= 2.8.12
- * g++ >= 4.6
- * qt >= 5.1.0
- * protobuf >= 2.0.0
+- `cmake` >= `3.13`
+- `g++` >= `10.0`
+- `Qt` >= `6.2`
 
-Package names for Ubuntu 16.04: `cmake protobuf-compiler qtbase5-dev g++`
+Package names for Ubuntu 22.04 are
+```
+cmake protobuf-compiler libprotobuf-dev qt6-base-dev libqt6opengl6-dev g++ libssl-dev libglu1-mesa-dev
+```
+where `protobuf-compiler` and `libprotobuf-dev` will be built from source if
+not already installed.
 
 ## Linux
 The recommended way of building a project with CMake is by doing an

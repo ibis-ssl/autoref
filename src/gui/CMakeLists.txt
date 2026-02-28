@@ -44,7 +44,7 @@ set(UI_SOURCES
     teamscorewidget.ui
     ../framework/src/ra/optionswidget.ui
 )
-qt5_wrap_ui(UIC_SOURCES ${UI_SOURCES})
+qt6_wrap_ui(UIC_SOURCES ${UI_SOURCES})
 target_sources(autoref PRIVATE ${UIC_SOURCES})
 
 if(MINGW)
@@ -69,8 +69,8 @@ target_link_libraries(autoref
     ra::widgets
     ${OPENGL_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
-    Qt5::Widgets
-    Qt5::OpenGL
+    Qt6::Widgets
+    Qt6::OpenGL
 )
 target_include_directories(autoref
     PRIVATE "${CMAKE_CURRENT_BINARY_DIR}"

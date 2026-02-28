@@ -33,7 +33,7 @@ target_link_libraries(autoref-cli
     PRIVATE autoref::backend
     PRIVATE amun::seshat
     PRIVATE shared::core
-    PRIVATE Qt5::Core
+    PRIVATE Qt6::Core
 )
 
 target_compile_definitions(autoref-cli

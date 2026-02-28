@@ -23,8 +23,9 @@
 #include "optionsmanager.h"
 #include "core/timer.h"
 #include "core/sslprotocols.h"
+#include "gamecontroller/strategygamecontrollermediator.h"
 #include "processor/processor.h"
-#include "protobuf/ssl_geometry.pb.h"
+#include "protobuf/ssl_vision/ssl_geometry.pb.h"
 #include "protobuf/world.pb.h"
 #include "strategy/strategy.h"
 #include "networkinterfacewatcher.h"
@@ -107,7 +108,7 @@ void Amun::start()
     m_gameControllerConnection.reset(new StrategyGameControllerMediator(true));
     m_gameControllerConnection->switchInternalGameController(false);
     m_gameControllerConnection->moveToThread(m_autorefThread);
-    connect(m_processor, &Processor::refereeHostChanged, m_gameControllerConnection.get(), &StrategyGameControllerMediator::handleRefereeHost);
+    connect(m_processor, &Processor::refereeHostChanged, m_gameControllerConnection.get(), &StrategyGameControllerMediator::handleExternalRefereeHost);
 
     // start strategy threads
     Q_ASSERT(m_autoref == nullptr);

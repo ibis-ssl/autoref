@@ -57,7 +57,7 @@ void AutorefTeamWidget::shutdown()
 void AutorefTeamWidget::init()
 {
     QBoxLayout *hLayout = new QHBoxLayout(this);
-    hLayout->setMargin(4);
+    hLayout->setContentsMargins(4, 4, 4, 4);
     hLayout->setSpacing(3);
 
     m_scriptMenu = new QMenu(this);
@@ -265,7 +265,7 @@ QString AutorefTeamWidget::shortenEntrypointName(const QMenu *menu, const QStrin
 
 void AutorefTeamWidget::showOpenDialog()
 {
-    QString filename = QFileDialog::getOpenFileName(this, "Open script", QString(), QString("Lua script entrypoint (init.lua)"), 0, 0);
+    QString filename = QFileDialog::getOpenFileName(this, "Open script", QString(), QString("Lua script entrypoint (init.lua)"));
     if (filename.isNull()) {
         return;
     }
