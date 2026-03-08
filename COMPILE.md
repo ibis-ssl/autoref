@@ -18,7 +18,7 @@ Package names for Ubuntu 22.04 are
 cmake protobuf-compiler libprotobuf-dev qt6-base-dev libqt6opengl6-dev g++ libssl-dev libglu1-mesa-dev
 ```
 where `protobuf-compiler` and `libprotobuf-dev` will be built from source if
-not already installed.
+not already installed or its version is anything other than `5.29.4`.
 
 ## Linux
 The recommended way of building a project with CMake is by doing an
@@ -30,14 +30,15 @@ cd build
 cmake ..
 make
 ```
-
-Autoref can be started from the build/bin/ directory.
-
-Further details on how to select a specific Qt-Installation or using the
-debugger can be found in the [framework repository](https://github.com/robotics-erlangen/framework/blob/master/COMPILE.md#unix).
-
+and then start the autoref from the build directory with `bin/autoref`.
 
 ## Windows
+
+### IMPORTANT NOTICE!
+The below instructions are currently out of date and we do not currently support a native windows build.
+If you really need to have the autoref run on windows try runnning it through WSL or use the docker image.
+
+#### dependencies
 Get dependencies (tested using the given versions):
 * cmake 3.2.2 - http://www.cmake.org/files/v3.2/cmake-3.2.2-win32-x86.exe
 * mingw-get - http://sourceforge.net/projects/mingw/files/Installer/mingw-get-setup.exe
@@ -83,7 +84,7 @@ mkdir bin/platforms && cp /c/Qt/5.5/mingw492_32/plugins/platforms/qwindows.dll b
 Finished!
 
 
-## Mac OS X
+## Mac OS (THIS SECTION IS OUT OF DATE, BECAUSE WE DON'T HAVE A MAC TO TEST THIS)
 Get dependencies using [Homebrew](http://brew.sh):
 ```
 brew install cmake git protobuf
