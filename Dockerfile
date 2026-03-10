@@ -8,8 +8,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN set -xe; \
 	apt-get update; \
 	apt-get install --no-install-recommends -y \
-		cmake make g++ protobuf-compiler patch \
-		qtbase5-dev libqt5opengl5-dev libprotobuf-dev; \
+		cmake make g++ patch protobuf-compiler libprotobuf-dev \
+		qt6-base-dev libqt6opengl6-dev libssl-dev libglu1-mesa-dev; \
 	apt-get clean -y; \
 	rm -rf /var/lib/apt/lists/*;
 
@@ -31,7 +31,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN set -xe; \
 	apt-get update; \
 	apt-get install --no-install-recommends -y \
-		qtbase5-dev libqt5opengl5-dev libprotobuf-dev \
+		libprotobuf-dev qt6-base-dev libqt6opengl6-dev \
+		libssl-dev libglu1-mesa-dev \
 		x11vnc xvfb \
 		tini ; \
 	apt-get clean -y; \
