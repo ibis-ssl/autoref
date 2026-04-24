@@ -3,6 +3,8 @@ name: Publish docker images
 on:
   workflow_dispatch:
   push:
+    branches:
+      - master
     tags:
       - '*'
 
