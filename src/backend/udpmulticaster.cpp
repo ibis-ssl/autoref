@@ -25,6 +25,7 @@
 #include <QHostAddress>
 #include <QNetworkInterface>
 #include <QUdpSocket>
+#include <QVariant>
 #include <QtGlobal>
 #include <vector>
 #include <QDebug>
