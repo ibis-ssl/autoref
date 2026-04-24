@@ -20,6 +20,7 @@
 
 #include "udpmulticaster.h"
 
+#include <QAbstractSocket>
 #include <QByteArray>
 #include <QHostAddress>
 #include <QNetworkInterface>
@@ -37,6 +38,7 @@ UDPMulticaster::UDPMulticaster(const QHostAddress& address, quint16 port, QObjec
 
         QUdpSocket* socket = new QUdpSocket(parent);
         socket->connectToHost(address, port, QUdpSocket::WriteOnly);
+        socket->setSocketOption(QAbstractSocket::MulticastTtlOption, 32);
         socket->setMulticastInterface(interface);
 
         m_sockets.push_back(socket);
